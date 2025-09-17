@@ -6,72 +6,94 @@
   <title>האתר המגניב שלי</title>
   <style>
     /* --- בסיסי --- */
+    :root {
+      --primary-color: #00796b;
+      --secondary-color: #388e3c;
+      --bg-light: #f1f8e9;
+      --bg-dark: #1e1e1e;
+      --text-light: #333;
+      --text-dark: #eee;
+      --card-light: #ffffff;
+      --card-dark: #2a2a2a;
+    }
+
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, sans-serif;
-      background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
-      color: #333;
+      background: var(--bg-light);
+      color: var(--text-light);
       text-align: center;
       padding: 0 20px;
-      transition: background 0.5s ease;
+      transition: background 0.5s ease, color 0.5s ease;
     }
 
-    /* --- כותרת --- */
     header {
       padding: 60px 20px 30px;
       background: rgba(255, 255, 255, 0.8);
-      border-bottom: 3px solid #00796b;
+      border-bottom: 3px solid var(--primary-color);
       box-shadow: 0 5px 10px rgba(0,0,0,0.1);
       border-radius: 0 0 20px 20px;
+      position: relative;
     }
 
     h1 {
       font-size: 3rem;
-      color: #00796b;
+      color: var(--primary-color);
       margin-bottom: 10px;
-      animation: fadeInDown 1s ease forwards;
     }
 
     h2 {
       font-size: 1.8rem;
-      color: #388e3c;
+      color: var(--secondary-color);
       margin-top: 0;
-      animation: fadeInUp 1s ease forwards;
     }
 
-    @keyframes fadeInDown {
-      0% {opacity: 0; transform: translateY(-20px);}
-      100% {opacity: 1; transform: translateY(0);}
+    /* --- כפתור מצב לילה/יום --- */
+    #theme-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: transform 0.3s;
     }
 
-    @keyframes fadeInUp {
-      0% {opacity: 0; transform: translateY(20px);}
-      100% {opacity: 1; transform: translateY(0);}
+    #theme-toggle:hover {
+      transform: rotate(20deg);
     }
 
-    /* --- פסקאות --- */
-    p {
+    /* --- כרטיסיות תוכן --- */
+    .card {
+      background: var(--card-light);
       max-width: 700px;
       margin: 20px auto;
-      line-height: 1.7;
-      font-size: 1.1rem;
-      transition: color 0.3s;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      text-align: right;
+      transition: background 0.5s, color 0.5s;
     }
 
-    /* --- קופסת תמונה --- */
+    .card h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+
+    .card p {
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+
+    /* --- תמונה --- */
     .image-box {
       margin: 40px auto;
       max-width: 400px;
-      border: 5px solid #00796b;
+      border: 5px solid var(--primary-color);
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .image-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.3);
     }
 
     .image-box img {
@@ -80,34 +102,32 @@
       display: block;
     }
 
-    /* --- כפתור אינטראקטיבי --- */
-    button {
-      background-color: #00796b;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-      margin: 15px 0;
-    }
-
-    button:hover {
-      background-color: #004d40;
-      transform: scale(1.05);
-    }
-
     /* --- פוטר --- */
     footer {
       margin-top: 60px;
       padding: 20px;
-      background: #00796b;
+      background: var(--primary-color);
       color: white;
       font-size: 0.9rem;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
       box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
+    }
+
+    /* --- מצב לילה --- */
+    body.dark-mode {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark-mode .card {
+      background: var(--card-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark-mode header {
+      background: rgba(50,50,50,0.8);
+      border-bottom-color: var(--secondary-color);
     }
   </style>
 </head>
@@ -115,48 +135,65 @@
 
   <header>
     <h1>ברוך הבא לאתר שלי</h1>
-    <h2>התנסות ב-Git וב-HTML</h2>
+    <h2>למידה, פרויקטים וחוויות</h2>
+    <button id="theme-toggle" title="החלף מצב"><span id="theme-icon">🌞</span></button>
   </header>
 
-  <p>
-    זהו דף הדגמה שבו אני לומד איך לעבוד עם Git, איך לשמור גרסאות,
-    ואיך לפרסם אתר דרך GitHub Pages. כאן אפשר להוסיף כמה שורות טקסט
-    על מה שאני רוצה – תחביבים, פרויקטים, או סתם תיאור קצר.
-  </p>
-
-  <div class="image-box">
-    <img src="picture.png" alt="תמונה להדגמה">
+  <!-- כרטיס תוכן 1 -->
+  <div class="card">
+    <h3>לימוד Git ו-HTML</h3>
+    <p>
+      כאן אני מתרגל עבודה עם Git כדי לשלוט בגרסאות הקוד שלי. 
+      לומדים איך ליצור מאגרים, לפתוח בראנצ׳ים, ולשלוח שינויים ל-GitHub.
+      בנוסף, אני מתנסה בבניית אתרים עם HTML בסיסי.
+    </p>
   </div>
 
-  <button onclick="toggleText()">הצג/הסתר טקסט נוסף</button>
+  <!-- כרטיס תוכן 2 -->
+  <div class="card">
+    <h3>עיצוב מודרני עם CSS</h3>
+    <p>
+      אני יוצר עיצוב נקי ומסודר עם כרטיסיות, צללים, גרדיאנטים ורקעים 
+      נעימים לעין. כל אלמנט באתר מותאם גם למצב יום וגם למצב לילה.
+    </p>
+  </div>
 
-  <p id="extra-text" style="display:none;">
-    אפשר להרחיב עם עוד פסקאות, קישורים, כפתורים ועוד – הכול פתוח.
-    זה רק הבסיס שממנו אפשר להתקדם ל-CSS מתקדם או JavaScript.
-  </p>
+  <!-- כרטיס תוכן 3 עם תמונה -->
+  <div class="card">
+    <h3>דוגמת תמונה</h3>
+    <p>כאן ניתן לראות איך להוסיף תמונה עם מסגרת מעוצבת וצל.</p>
+    <div class="image-box">
+      <img src="picture.png" alt="תמונה להדגמה">
+    </div>
+  </div>
+
+  <!-- כרטיס תוכן 4 -->
+  <div class="card">
+    <h3>רעיונות לעתיד</h3>
+    <p>
+      ניתן להוסיף פונקציות אינטראקטיביות כמו כפתורים, אנימציות, 
+      גלריות תמונות מתקדמות או חיבור למסדי נתונים כדי להפוך את האתר
+      למקצועי יותר.
+    </p>
+  </div>
 
   <footer>
-    © 2025 האתר שלי – נבנה בלמידה 
+    © 2025 האתר שלי – נבנה בלמידה והתנסות 
   </footer>
 
   <script>
-    // --- פונקציה להראות/להסתר טקסט ---
-    function toggleText() {
-      const text = document.getElementById('extra-text');
-      if (text.style.display === "none") {
-        text.style.display = "block";
-      } else {
-        text.style.display = "none";
-      }
-    }
+    // --- Dark/Light Mode Toggle ---
+    const toggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
 
-    // --- שינוי רקע עם צבעים משתנים ---
-    let colors = ['#e0f7fa','#f1f8e9','#fff3e0','#fce4ec'];
-    let i = 0;
-    setInterval(() => {
-      document.body.style.background = `linear-gradient(135deg, ${colors[i]}, ${colors[(i+1)%colors.length]})`;
-      i = (i+1) % colors.length;
-    }, 5000);
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if(document.body.classList.contains('dark-mode')) {
+        themeIcon.textContent = '🌙';
+      } else {
+        themeIcon.textContent = '🌞';
+      }
+    });
   </script>
 
 </body>
