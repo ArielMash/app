@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>האתר המגניב </title>
+  <title>האתר המגניב שלי</title>
   <style>
-    /* רקע בהיר עם גרדיאנט */
+    /* --- בסיסי --- */
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, sans-serif;
@@ -13,31 +13,52 @@
       color: #333;
       text-align: center;
       padding: 0 20px;
+      transition: background 0.5s ease;
     }
 
+    /* --- כותרת --- */
     header {
-      padding: 40px 0 20px;
+      padding: 60px 20px 30px;
+      background: rgba(255, 255, 255, 0.8);
+      border-bottom: 3px solid #00796b;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 20px 20px;
     }
 
     h1 {
       font-size: 3rem;
       color: #00796b;
       margin-bottom: 10px;
+      animation: fadeInDown 1s ease forwards;
     }
 
     h2 {
       font-size: 1.8rem;
       color: #388e3c;
       margin-top: 0;
+      animation: fadeInUp 1s ease forwards;
     }
 
+    @keyframes fadeInDown {
+      0% {opacity: 0; transform: translateY(-20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    /* --- פסקאות --- */
     p {
       max-width: 700px;
       margin: 20px auto;
       line-height: 1.7;
       font-size: 1.1rem;
+      transition: color 0.3s;
     }
 
+    /* --- קופסת תמונה --- */
     .image-box {
       margin: 40px auto;
       max-width: 400px;
@@ -45,6 +66,12 @@
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .image-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.3);
     }
 
     .image-box img {
@@ -53,17 +80,40 @@
       display: block;
     }
 
+    /* --- כפתור אינטראקטיבי --- */
+    button {
+      background-color: #00796b;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin: 15px 0;
+    }
+
+    button:hover {
+      background-color: #004d40;
+      transform: scale(1.05);
+    }
+
+    /* --- פוטר --- */
     footer {
       margin-top: 60px;
       padding: 20px;
       background: #00796b;
       color: white;
+      font-size: 0.9rem;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 0 -5px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>test</h1>
     <h1>ברוך הבא לאתר שלי</h1>
     <h2>התנסות ב-Git וב-HTML</h2>
   </header>
@@ -78,7 +128,9 @@
     <img src="picture.png" alt="תמונה להדגמה">
   </div>
 
-  <p>
+  <button onclick="toggleText()">הצג/הסתר טקסט נוסף</button>
+
+  <p id="extra-text" style="display:none;">
     אפשר להרחיב עם עוד פסקאות, קישורים, כפתורים ועוד – הכול פתוח.
     זה רק הבסיס שממנו אפשר להתקדם ל-CSS מתקדם או JavaScript.
   </p>
@@ -86,5 +138,26 @@
   <footer>
     © 2025 האתר שלי – נבנה בלמידה 
   </footer>
+
+  <script>
+    // --- פונקציה להראות/להסתר טקסט ---
+    function toggleText() {
+      const text = document.getElementById('extra-text');
+      if (text.style.display === "none") {
+        text.style.display = "block";
+      } else {
+        text.style.display = "none";
+      }
+    }
+
+    // --- שינוי רקע עם צבעים משתנים ---
+    let colors = ['#e0f7fa','#f1f8e9','#fff3e0','#fce4ec'];
+    let i = 0;
+    setInterval(() => {
+      document.body.style.background = `linear-gradient(135deg, ${colors[i]}, ${colors[(i+1)%colors.length]})`;
+      i = (i+1) % colors.length;
+    }, 5000);
+  </script>
+
 </body>
 </html>
