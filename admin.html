@@ -1,221 +1,38 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>האתר המגניב שלי</title>
-  <style>
-    /* ===== עיצוב בסיסי ===== */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      background: linear-gradient(135deg,#e0f7fa,#f1f8e9);
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    header {
-      text-align: center;
-      padding: 50px 20px 20px;
-      animation: fadeInDown 1.2s ease-out;
-    }
-    h1 {
-      font-size: 3rem;
-      color: #00796b;
-      margin: 0 0 10px;
-    }
-    h2 {
-      font-size: 1.8rem;
-      color: #388e3c;
-      margin: 0;
-    }
-
-    main {
-      flex: 1;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      animation: fadeIn 1.2s ease-out;
-    }
-
-    /* ===== תיבת תמונה ===== */
-    .image-box {
-      max-width: 400px;
-      margin: 20px auto 40px;
-      border: 5px solid #00796b;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      transition: transform 0.4s ease;
-    }
-    .image-box:hover {
-      transform: scale(1.05);
-    }
-    .image-box img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* ===== טופס יצירת קשר ===== */
-    .lead-form {
-      max-width: 420px;
-      width: 100%;
-      background: #ffffffcc;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      direction: rtl;
-      text-align: right;
-      animation: slideUp 1s ease-out;
-    }
-
-    .lead-form h3 {
-      text-align: center;
-      font-size: 1.6rem;
-      margin-bottom: 25px;
-      color: #00796b;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s;
-    }
-    .form-group input:focus {
-      border-color: #00796b;
-      outline: none;
-    }
-
-    .submit-btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #00796b;
-      color: white;
-      font-size: 1.1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .submit-btn:hover {
-      background: #00695c;
-    }
-
-    .thanks-message {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-      color: #388e3c;
-      font-weight: bold;
-      font-size: 1.1rem;
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    footer {
-      background: #00796b;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: auto;
-      animation: fadeInUp 1.2s ease-out;
-    }
-
-    /* ===== אנימציות ===== */
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    @keyframes fadeInDown {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes slideUp {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* רספונסיביות */
-    @media (max-width: 500px) {
-      h1 {font-size: 2.4rem;}
-      h2 {font-size: 1.4rem;}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>רשימת פניות</title>
+<style>
+body { font-family:Arial, sans-serif; padding:20px; background:#f5f5f5;}
+h1 { text-align:center; color:#00796b;}
+table {
+  width:90%; margin:20px auto; border-collapse:collapse;
+  background:white; box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+th,td { padding:12px; border-bottom:1px solid #ddd; text-align:center; }
+th { background:#00796b; color:white; }
+</style>
 </head>
 <body>
-  <header>
-    <h1>ברוך הבא לאתר שלי</h1>
-    <h2>דף מעוצב עם טופס קשר</h2>
-  </header>
-
-  <main>
-    <div>
-      <div class="image-box">
-        <img src="picture.png" alt="תמונה להדגמה">
-      </div>
-
-      <form id="leadForm" class="lead-form">
-        <h3>השאר פרטים</h3>
-
-        <div class="form-group">
-          <label for="name">שם:</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-
-        <div class="form-group">
-          <label for="phone">טלפון:</label>
-          <input type="tel" id="phone" name="phone" pattern="\d{9,15}" required placeholder="מספר בלבד">
-        </div>
-
-        <div class="form-group">
-          <label for="email">אימייל:</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-
-        <button type="submit" class="submit-btn">שליחה</button>
-        <div id="thanks" class="thanks-message">תודה! הטופס נשלח בהצלחה</div>
-      </form>
-    </div>
-  </main>
-
-  <footer>
-    © 2025 האתר שלי – נבנה בלמידה
-  </footer>
-
-  <script>
-    // הצגת הודעת תודה ל-3 שניות
-    document.getElementById('leadForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      const thanks = document.getElementById('thanks');
-      thanks.style.display = 'block';
-      setTimeout(() => {
-        thanks.style.display = 'none';
-        this.reset();
-      }, 3000);
-      // כאן ניתן להוסיף שליחה לשרת/פונקציה במידת הצורך
-    });
-  </script>
+<h1>נתוני הטפסים שהתקבלו</h1>
+<table id="dataTbl">
+  <thead>
+    <tr><th>שם</th><th>טלפון</th><th>אימייל</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<script>
+(async ()=>{
+  const res = await fetch('/.netlify/functions/list');
+  const arr = await res.json();
+  const tbody = document.querySelector('#dataTbl tbody');
+  arr.forEach(r=>{
+    tbody.insertAdjacentHTML('beforeend',
+      `<tr><td>${r.name}</td><td>${r.phone}</td><td>${r.email}</td></tr>`);
+  });
+})();
+</script>
 </body>
 </html>
