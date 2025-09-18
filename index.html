@@ -1,66 +1,38 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>האתר המגניב שלי</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>רשימת פניות</title>
+<style>
+body { font-family:Arial, sans-serif; padding:20px; background:#f5f5f5;}
+h1 { text-align:center; color:#00796b;}
+table {
+  width:90%; margin:20px auto; border-collapse:collapse;
+  background:white; box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+th,td { padding:12px; border-bottom:1px solid #ddd; text-align:center; }
+th { background:#00796b; color:white; }
+</style>
 </head>
 <body>
-
-  <header>
-    <h1>ברוך הבא לאתר שלי</h1>
-    <h2>למידה, פרויקטים וחוויות</h2>
-    <button id="theme-toggle" title="החלף מצב"><span id="theme-icon">🌞</span></button>
-  </header>
-
-  <!-- כרטיס תוכן 1 -->
-  <div class="card">
-    <h3>לימוד Git ו-HTML</h3>
-    <p>
-      כאן אני מתרגל עבודה עם Git כדי לשלוט בגרסאות הקוד שלי. 
-      לומדים איך ליצור מאגרים, לפתוח בראנצ׳ים, ולשלוח שינויים ל-GitHub.
-      בנוסף, אני מתנסה בבניית אתרים עם HTML בסיסי.
-    </p>
-  </div>
-
-  <!-- כרטיס תוכן 2 -->
-  <div class="card">
-    <h3>עיצוב מודרני עם CSS</h3>
-    <p>
-      אני יוצר עיצוב נקי ומסודר עם כרטיסיות, צללים, רקעים נעימים לעין.
-      כל אלמנט באתר מותאם גם למצב יום וגם למצב לילה.
-    </p>
-  </div>
-
-  <!-- כרטיס תוכן 3 עם תמונה -->
-  <div class="card">
-    <h3>דוגמת תמונה</h3>
-    <p>כאן ניתן לראות איך להוסיף תמונה עם מסגרת מעוצבת וצל.</p>
-    <div class="image-box">
-      <img src="picture.png" alt="תמונה להדגמה">
-    </div>
-  </div>
-
-  <!-- כרטיס תוכן 4 - שאלון -->
-  <div class="card">
-    <h3>השאלון שלנו</h3>
-    <form name="contact" method="POST" data-netlify="true">
-      <label for="phone">טלפון:</label><br>
-      <input type="tel" id="phone" name="phone" required placeholder="052-1234567"><br><br>
-
-      <label for="email">אימייל:</label><br>
-      <input type="email" id="email" name="email" required placeholder="example@mail.com"><br><br>
-
-      <button type="submit">שלח</button>
-    </form>
-    <p style="font-size:0.9rem;color:gray;">* הנתונים ישמרו ותוכל לראות אותם בלוח Netlify.</p>
-  </div>
-
-  <footer>
-    © 2025 האתר שלי – נבנה בלמידה והתנסות 
-  </footer>
-
-  <script src="script.js" defer></script>
+<h1>נתוני הטפסים שהתקבלו</h1>
+<table id="dataTbl">
+  <thead>
+    <tr><th>שם</th><th>טלפון</th><th>אימייל</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<script>
+(async ()=>{
+  const res = await fetch('/.netlify/functions/list');
+  const arr = await res.json();
+  const tbody = document.querySelector('#dataTbl tbody');
+  arr.forEach(r=>{
+    tbody.insertAdjacentHTML('beforeend',
+      `<tr><td>${r.name}</td><td>${r.phone}</td><td>${r.email}</td></tr>`);
+  });
+})();
+</script>
 </body>
 </html>
