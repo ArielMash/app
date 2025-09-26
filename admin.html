@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>רשימת פניות</title>
+<style>
+body { font-family:Arial, sans-serif; padding:20px; background:#f5f5f5;}
+h1 { text-align:center; color:#00796b;}
+table {
+  width:90%; margin:20px auto; border-collapse:collapse;
+  background:white; box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+th,td { padding:12px; border-bottom:1px solid #ddd; text-align:center; }
+th { background:#00796b; color:white; }
+</style>
+</head>
+<body>
+<h1>נתוני הטפסים שהתקבלו</h1>
+<table id="dataTbl">
+  <thead>
+    <tr><th>שם</th><th>טלפון</th><th>אימייל</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<script>
+(async ()=>{
+  const res = await fetch('/.netlify/functions/list');
+  const arr = await res.json();
+  const tbody = document.querySelector('#dataTbl tbody');
+  arr.forEach(r=>{
+    tbody.insertAdjacentHTML('beforeend',
+      `<tr><td>${r.name}</td><td>${r.phone}</td><td>${r.email}</td></tr>`);
+  });
+})();
+</script>
+</body>
+</html>
